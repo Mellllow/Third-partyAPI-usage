@@ -1,23 +1,23 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-
 //jquery
 $(document).ready(function(){
 
 
-// TODO: Add a listener for click events on the save button. 
-// This code should use the id in the containing time-block as a key to save the user input in
-//local storage. 
-//function saveUserimput(){
+//save button into local storage
 $(".saveBtn").on('click', function(){
-  var key = $(this).parent().attr("id");
-  var values = $(this).parent().find(".description").val;
-  localStorage.setItem(key,values)
+  const key = $(this).parent().attr("id");
+  const values = $(this).parent().find(".description").val();
+  localStorage.setItem(key,values);
 });
 
-
+// to get from local storage
+$('.time-block').each(function(){
+  const key = $(this).attr('id');
+  const value = localStorage.getItem(key);
+  $(this).children('.description').val(value);
+});
   
   
-  // TODO: Add code to display the current date in the header of the page.
+ //header time
   function updateTime() {
     const dateElement = $('#date');
     const timeElement = $('#time');
