@@ -26,6 +26,20 @@ $('.time-block').each(function(){
     dateElement.text(currentDate);
     timeElement.text(currentTime);
   }
-
+  function colorChange(){
+    $(".time-block").each(function(){
+      const blockHour = parseInt(this.class);
+      if (blockHour === hourPresent) {
+        $(this).removeClass('future past').addClass('present');
+      } else if (blockHour < hourPresent) {
+        $(this).removeClass('present future').addClass('past');
+      } else {
+        $(this).removeClass('present past').addClass('future');
+      }
+    });
+  }
+currentDate();
+currentTime();
+colorChange();
 setInterval(updateTime, 1000);
 })
