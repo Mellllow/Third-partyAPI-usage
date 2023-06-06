@@ -25,21 +25,25 @@ $('.time-block').each(function(){
     const currentTime = dayjs().format('hh:mm:ss A');
     dateElement.text(currentDate);
     timeElement.text(currentTime);
-  }
-  function colorChange(){
-    $(".time-block").each(function(){
-      const blockHour = parseInt(this.class);
-      if (blockHour === hourPresent) {
-        $(this).removeClass('future past').addClass('present');
-      } else if (blockHour < hourPresent) {
-        $(this).removeClass('present future').addClass('past');
-      } else {
-        $(this).removeClass('present past').addClass('future');
-      }
-    });
-  }
-currentDate();
-currentTime();
+  };
+  
+  function colorChange() {
+    var currentHour = dayjs().hour()
+    $('.time-block').each(function() {
+      const blockHour = parseInt($(this).attr("id").split("-")[1]);
+      console.log(blockHour)
+      $(this).toggleClass('past', blockHour < currentHour);
+      $(this).toggleClass('present', blockHour === currentHour);
+      $(this).toggleClass('future', blockHour > currentHour);
+    })};
+
+//console.log(blockHour,blockPresent)
+//currentDate();
+//currentTime();
+//need to update time
+
+setInterval(updateTime, 1000);
 colorChange();
 setInterval(updateTime, 1000);
-})
+
+});
